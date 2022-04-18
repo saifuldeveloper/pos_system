@@ -75,7 +75,7 @@
                 </div>
               </div>
             </div><!-- /.card-body -->
-
+<!-- Amin  -->
             <div class="card-body">
               <form action="{{route('purchase.store')}}" method="POST" id="myForm">
                 @csrf
