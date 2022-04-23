@@ -34,7 +34,7 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="text-primary">
-                  product list
+                  puchase list
                   <a class="btn btn-primary float-right btn-sm" href="{{ route('purchase.add') }}"><i class="fa fa-plus-circle pr-3"></i>Add Purchase</a>
                 </h3>
               </div><!-- /.card-header -->

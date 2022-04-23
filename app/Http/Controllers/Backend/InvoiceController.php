@@ -11,24 +11,36 @@ use App\Models\Product;
 use App\Models\Supplier;
 use App\Models\Customers;
 use App\Models\Unit;
+use App\Models\Invoice;
+use App\Models\InvoiceDetails;
+use App\Models\Payment;
+use App\Models\PaymentDetails;
 use Illuminate\Support\Facades\DB;
 
-class PurchaseController extends Controller
+class InvoiceController extends Controller
 {
     public function view()
     {
-        $allData = Purchase::orderBy('date','desc')->get();
+        $allData = Invoice::orderBy('date','desc')->get();
         // $data['allData']=purchase::all();
         // return view('backend.purchase.view-purchase',$data);
-        return view('backend.purchase.view-purchase', compact('allData'));
+        return view('backend.invoice.view-invoice', compact('allData'));
     }
 
     public function add()
     {
-        $data['supplier'] = Supplier::all();
         $data['category'] = Category::all();
-        $data['unit'] = Unit::all();
-        return view('backend.purchase.add-purchase', $data);
+        $invoice_data=Invoice::orderBy('id','desc')->first();
+        if($invoice_data==NULL){
+            $firstReg ='0';
+            $data['invoice_no']=$firstReg+1;
+        }else{
+            $invoice_data=Invoice::orderBy('id','desc')->first()->invoice_no;
+            $data['invoice_no']=$invoice_data+1;
+
+        }
+        $data['customers']=Customers::all();
+        return view('backend.invoice.add-invoice', $data);
     }
 
     public function store(Request $request)
@@ -122,4 +134,5 @@ class PurchaseController extends Controller
         );
         return  redirect()->route('purchase.pending.list')->with($notification);
     }
+    
 }

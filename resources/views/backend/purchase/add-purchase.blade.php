@@ -279,24 +279,24 @@
        var product_id =$('#product_id').val();
        var product_name =$('#product_id').find('option:selected').text();
 
-        if(date ==''){
-          alert('date is null');
+        if(date ==''){     
+        toastr.error("Date filed is Null");
           return false;
         };
         if(purchase_no ==''){
-          alert('Purchase  Fields null');
+          toastr.error("Purchase  filed is Null");
           return false;
         };
         if(supplier_id ==''){
-          alert('Supplier  null');
+          toastr.error("Supplier filed is Null");
           return false;
         };
         if(category_id ==''){
-          alert('Category   null');
+          toastr.error("Category filed is Null");
           return false;
         };
         if(product_id ==''){
-          alert('Product   null');
+          toastr.error("Product filed is Null");
           return false;
         };
 

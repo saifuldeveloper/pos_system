@@ -97,6 +97,17 @@ Route::prefix('purchase')->group(function(){
 
 Route::get('/get-category',[App\Http\Controllers\Backend\DefaultController::class,'getCategory'])->name('get-category');
 Route::get('/get-product',[App\Http\Controllers\Backend\DefaultController::class,'getProduct'])->name('get-product');
+Route::get('/check-product-stock',[App\Http\Controllers\Backend\DefaultController::class,'getStock'])->name('check-product-stock');
+
+
+Route::prefix('invoice')->group(function(){
+    Route::get('/view',[App\Http\Controllers\Backend\InvoiceController::class,'view'])->name('invoice.view');
+    Route::get('/add',[App\Http\Controllers\Backend\InvoiceController::class,'add'])->name('invoice.add');
+    Route::post('/store',[App\Http\Controllers\Backend\InvoiceController::class,'store'])->name('invoice.store');
+    Route::get('/pending',[App\Http\Controllers\Backend\InvoiceController::class,'pendinglist'])->name('invoice.pending.list');
+    Route::get('/approve/{id}',[App\Http\Controllers\Backend\InvoiceController::class,'approve'])->name('invoice.approve');
+    Route::get('/delete/{id}',[App\Http\Controllers\Backend\InvoiceController::class,'delete'])->name('invoice.delete');
+});
 
 
 
