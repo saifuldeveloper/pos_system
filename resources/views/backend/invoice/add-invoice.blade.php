@@ -44,7 +44,7 @@
                 </div>
                 <div class="form-group col-md-2">
                   <label>Date</label>
-                  <input type="date" name="date" id="date" class="form-control datepicker form-control-sm">
+                  <input type="date"  name="date" value="{{$date}}" id="date" class="form-control datepicker form-control-sm">
                 </div>
                 <div class="form-group col-md-3 ">
                   <label>Category Name</label>
@@ -75,7 +75,7 @@
             </div><!-- /.card-body -->
 <!-- Amin  -->
             <div class="card-body">
-              <form action="{{route('purchase.store')}}" method="POST" id="myForm">
+              <form action="{{route('invoice.store')}}" method="POST" id="myForm">
                 @csrf
                 <table class="table table-bordered" width="100%">
                   <thead>
@@ -93,7 +93,7 @@
                   </tbody>
                   <tbody>
                     <tr>
-                      <td colspan="4">Discount</td>
+                      <td colspan="4" class="text-right">Discount</td>
                       <td>
                         <input type="text" name="discount_amount" id="discount_amount" class="form-control form-control-sm discount_amount" placeholder="Enter Discount Amount">
                       </td>
@@ -122,7 +122,7 @@
                        <option value="full_due">Full Due</option>
                        <option value="partial_paid">Partial  Paid</option>
                      </select>
-                     <input type="text" name="paid_amount" class="form-control form-control-sm paid_amount" placeholder="Enter Paid Amount" style="display: none">
+                     <input type="number" name="paid_amount" class="form-control form-control-sm paid_amount" placeholder="Enter Paid Amount" style="display: none">
                   </div>
                   <div class="form-group col-md-8">
                     <label for="">Customer Name</label>
@@ -141,10 +141,10 @@
                     <input type="text" name="name" id="name" class="form-control form-control-sm" placeholder="Write Customer Name">
                   </div>
                   <div class="form-group col-md-4">
-                    <input type="text" name="mobile" id="mobile" class="form-control form-control-sm" placeholder="Write Customer mobile">
+                    <input type="number" name="mobile" id="mobile" class="form-control form-control-sm" placeholder="Write Customer Mobile">
                   </div>
                   <div class="form-group col-md-4">
-                    <input type="text" name="mobile" id="mobile" class="form-control form-control-sm" placeholder="Write Customer mobile">
+                    <input type="text" name="address" id="address" class="form-control form-control-sm" placeholder="Write Customer Address">
                   </div>
                 </div>
               </div>
@@ -246,7 +246,7 @@
   $(document).ready(function(){
     $(document).on('click', '#addeventmore', function() {
        var date        =$('#date').val();
-       var purchase_no =$('#invoice_no').val();
+       var invoice_no =$('#invoice_no').val();
        var category_id =$('#category_id').val();
        var category_name =$('#category_id').find('option:selected').text();
        var product_id =$('#product_id').val();

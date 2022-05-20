@@ -37,7 +37,7 @@ class PurchaseController extends Controller
         if ($request->category_id == NULL) {
             $notification = array(
                 'message' => 'Sorry! You do not select any item',
-                'alert-type' => 'danger'
+                'alert-type' => 'error'
             );
             return  redirect()->back()->with($notification);
         } else {
