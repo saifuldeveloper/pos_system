@@ -107,6 +107,7 @@ Route::prefix('invoice')->group(function(){
     Route::get('/pending',[App\Http\Controllers\Backend\InvoiceController::class,'pendinglist'])->name('invoice.pending.list');
     Route::get('/approve/{id}',[App\Http\Controllers\Backend\InvoiceController::class,'approve'])->name('invoice.approve');
     Route::get('/delete/{id}',[App\Http\Controllers\Backend\InvoiceController::class,'delete'])->name('invoice.delete');
+    Route::post('/approval/store/{id}',[App\Http\Controllers\Backend\InvoiceController::class,'approvestore'])->name('approval.store');
 });
 
 

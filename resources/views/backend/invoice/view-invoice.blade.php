@@ -46,28 +46,25 @@
                             <th>Customer Name</th>
                             <th>Invoice NO</th>
                             <th>Date</th>
-                            <th>Category </th>
                             <th>Describtion</th>
-                            <th style="width: 12%;">Action</th>
+                            <th>Amount</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- @foreach ($allData as  $key=>$invoice) --}}
+                         @foreach ($allData as  $key=>$invoice) 
                         <tr>
-                            <td>1</td>
-                            <td>saiful</td>
-                            <td> 5678</td>
-                            <td>78 may 2020 </td>
-                            <td>oil</td>
-                            <td>oil asdf</td>
-
-                            {{-- <td>
-                                @if($invoice->status=="0")
-                                <a href="{{ route('invoice.delete',$invoice->id) }}" id="delete" class="btn btn-sm btn-danger " title="Delete"><i class="fa fa-trash"></i></a>
-                                @endif
-                            </td> --}}
+                            <td>{{$key+1}}</td>
+                            <td>
+                              {{$invoice['payment']['customer']['name']}}
+                              ({{$invoice['payment']['customer']['mobile']}})-
+                              ({{$invoice['payment']['customer']['address']}})
+                            </td>
+                            <td>Invoice no #{{$invoice->invoice_no}}</td>
+                            <td>{{date('d-m-Y',strtotime($invoice->date))}}</td>
+                            <td>{{$invoice->description }}</td>
+                            <td>{{$invoice['payment']['total_amount']}}</td>
                         </tr>
-                        {{-- @endforeach --}}
+                       @endforeach
                     </tbody>
                 </table>
               </div><!-- /.card-body -->

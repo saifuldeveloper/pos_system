@@ -44,7 +44,7 @@
                 </div>
                 <div class="form-group col-md-2">
                   <label>Date</label>
-                  <input type="date"  name="date" value="{{$date}}" id="date" class="form-control datepicker form-control-sm">
+                  <input type="text"  name="date" value="{{ \Carbon\Carbon::parse($date)->format('d M, Y')}}" id="date" class="form-control  form-control-sm">
                 </div>
                 <div class="form-group col-md-3 ">
                   <label>Category Name</label>
