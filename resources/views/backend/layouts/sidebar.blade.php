@@ -227,6 +227,12 @@ $route =Route::current()->getName();
                 <p>Approval Print</p>
               </a>
             </li>
+            <li class="nav-item">
+              <a href="{{ route('invoice.daily.report') }}" class="nav-link {{ $route==('invoice.daily.report')?'active':'' }}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Daily Invoice Report</p>
+              </a>
+            </li>
           </ul>
         </li>
       </ul>

@@ -66,7 +66,7 @@
                   @endforeach
                 </tbody>
               </table>
-            </div><!-- /.card-body -->
+            </div>
           </div>
         </section>
         <!-- /.Left col -->

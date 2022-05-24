@@ -110,4 +110,6 @@ Route::prefix('invoice')->group(function () {
     Route::post('/approval/store/{id}', [App\Http\Controllers\Backend\InvoiceController::class, 'approvestore'])->name('approval.store');
     Route::get('/print/list', [App\Http\Controllers\Backend\InvoiceController::class, 'invoiceprintlist'])->name('invoice.print.list');
     Route::get('/print/{id}', [App\Http\Controllers\Backend\InvoiceController::class, 'invoiceprint'])->name('invoice.print');
+    Route::get('/daily/report', [App\Http\Controllers\Backend\InvoiceController::class, 'dailyreport'])->name('invoice.daily.report');
+    Route::get('/daily/report/pdf', [App\Http\Controllers\Backend\InvoiceController::class, 'dailyreportpdf'])->name('invoice.daily.invoice.pdf');
 });

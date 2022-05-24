@@ -215,4 +215,20 @@ class InvoiceController extends Controller
         $pdf = PDF::loadView('backend.pdf.invoice-pdf', $data);
         return $pdf->download('document.pdf');
     }
+
+    public function dailyreport(){
+        return view('backend.invoice.daily-invoice-report');
+    }
+    public function dailyreportpdf(Request $request){
+        $sdate=date('Y-m-d',strtotime($request->start_date));
+        $edate=date('Y-m-d',strtotime($request->end_date));
+        $data['allData']=Invoice::whereBetween('date',[$sdate,$edate])->where('status','1')->get();
+        $data['start_date']=date('Y-m-d',strtotime($request->start_date));
+        $data['end_date']=date('Y-m-d',strtotime($request->end_date));
+        $pdf = PDF::loadView('backend.pdf.daily-invoice-repost-pdf', $data);
+        return $pdf->download('document.pdf');
+
+         
+
+    }
 }
