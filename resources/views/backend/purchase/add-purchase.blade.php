@@ -48,7 +48,7 @@
                 </div>
                 <div class="form-group col-md-4 ">
                   <label>Supplier Name</label>
-                  <select name="supplier_id" id="supplier_id" class="form-control select2" >
+                  <select name="supplier_id" id="supplier_id" class="form-control select2">
                     <option value="" style="padding:10px;"> Select Supplier </option>
                     @foreach ($supplier as $item)
                     <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -75,7 +75,7 @@
                 </div>
               </div>
             </div><!-- /.card-body -->
-<!-- Amin  -->
+            <!-- Amin  -->
             <div class="card-body">
               <form action="{{route('purchase.store')}}" method="POST" id="myForm">
                 @csrf
@@ -269,80 +269,78 @@
 
 </script>
 <script type="text/javascript">
-  $(document).ready(function(){
+  $(document).ready(function() {
     $(document).on('click', '#addeventmore', function() {
-       var date        =$('#date').val();
-       var purchase_no =$('#purchase_no').val();
-       var supplier_id =$('#supplier_id').val();
-       var category_id =$('#category_id').val();
-       var category_name =$('#category_id').find('option:selected').text();
-       var product_id =$('#product_id').val();
-       var product_name =$('#product_id').find('option:selected').text();
+      var date = $('#date').val();
+      var purchase_no = $('#purchase_no').val();
+      var supplier_id = $('#supplier_id').val();
+      var category_id = $('#category_id').val();
+      var category_name = $('#category_id').find('option:selected').text();
+      var product_id = $('#product_id').val();
+      var product_name = $('#product_id').find('option:selected').text();
 
-        if(date ==''){     
+      if (date == '') {
         toastr.error("Date filed is Null");
-          return false;
-        };
-        if(purchase_no ==''){
-          toastr.error("Purchase  filed is Null");
-          return false;
-        };
-        if(supplier_id ==''){
-          toastr.error("Supplier filed is Null");
-          return false;
-        };
-        if(category_id ==''){
-          toastr.error("Category filed is Null");
-          return false;
-        };
-        if(product_id ==''){
-          toastr.error("Product filed is Null");
-          return false;
-        };
+        return false;
+      };
+      if (purchase_no == '') {
+        toastr.error("Purchase  filed is Null");
+        return false;
+      };
+      if (supplier_id == '') {
+        toastr.error("Supplier filed is Null");
+        return false;
+      };
+      if (category_id == '') {
+        toastr.error("Category filed is Null");
+        return false;
+      };
+      if (product_id == '') {
+        toastr.error("Product filed is Null");
+        return false;
+      };
 
-        var source =$('#document-templete').html();
-        var template= Handlebars.compile(source);
-         var data ={
-                  date:date,
-                  purchase_no:purchase_no,
-                  supplier_id:supplier_id,
-                  category_id:category_id,
-                  category_name:category_name,
-                  product_id:product_id,
-                  product_name:product_name,
+      var source = $('#document-templete').html();
+      var template = Handlebars.compile(source);
+      var data = {
+        date: date,
+        purchase_no: purchase_no,
+        supplier_id: supplier_id,
+        category_id: category_id,
+        category_name: category_name,
+        product_id: product_id,
+        product_name: product_name,
 
-         };
-         var html =template(data);
-         $('#Addrow').append(html);
+      };
+      var html = template(data);
+      $('#Addrow').append(html);
     });
-    $(document).on('click','.removeeventmore',function(event){
-       $(this).closest(".delete_add_more_item").remove();
-       totalAmountPrice();
+    $(document).on('click', '.removeeventmore', function(event) {
+      $(this).closest(".delete_add_more_item").remove();
+      totalAmountPrice();
 
-    });
-
-    $(document).on('keyup click','.unit_price,.buying_qty',function(){
-       var unit_price   =$(this).closest("tr").find("input.unit_price").val();
-       var qty          =$(this).closest("tr").find("input.buying_qty").val();
-       var total        =unit_price * qty;
-       $(this).closest("tr").find("input.buying_price").val(total);
-       totalAmountPrice();
     });
 
-    function totalAmountPrice(){
-      var sum=0;
-      $('.buying_price').each(function(){
-         var value =$(this).val();
-         if(!isNaN(value) && value.lenght !=0){
-            sum += parseFloat(value);
-         }
+    $(document).on('keyup click', '.unit_price,.buying_qty', function() {
+      var unit_price = $(this).closest("tr").find("input.unit_price").val();
+      var qty = $(this).closest("tr").find("input.buying_qty").val();
+      var total = unit_price * qty;
+      $(this).closest("tr").find("input.buying_price").val(total);
+      totalAmountPrice();
+    });
+
+    function totalAmountPrice() {
+      var sum = 0;
+      $('.buying_price').each(function() {
+        var value = $(this).val();
+        if (!isNaN(value) && value.lenght != 0) {
+          sum += parseFloat(value);
+        }
       });
       $('#estimated_amount').val(sum);
     }
-     
-    });
- 
 
+  });
 </script>
 
 

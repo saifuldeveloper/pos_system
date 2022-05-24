@@ -44,11 +44,11 @@
                 </div>
                 <div class="form-group col-md-2">
                   <label>Date</label>
-                  <input type="text"  name="date" value="{{ \Carbon\Carbon::parse($date)->format('d M, Y')}}" id="date" class="form-control  form-control-sm">
+                  <input type="text" name="date" value="{{ \Carbon\Carbon::parse($date)->format('d M, Y')}}" id="date" class="form-control  form-control-sm">
                 </div>
                 <div class="form-group col-md-3 ">
                   <label>Category Name</label>
-                  <select name="category_id" id="category_id" class="form-control select2" >
+                  <select name="category_id" id="category_id" class="form-control select2">
                     <option value="" style="padding:10px;"> Select Category </option>
                     @foreach ($category as $item)
                     <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -63,17 +63,17 @@
                 </div>
                 <div class="form-group col-md-2 ">
                   <label>Stock (pcs/Kg)</label>
-                    <input type="text" name="cuttent_stoct_qty" id="cuttent_stoct_qty" class="form-control form-control-sm" readonly style="background-color: #D8FDBA">
+                  <input type="text" name="cuttent_stoct_qty" id="cuttent_stoct_qty" class="form-control form-control-sm" readonly style="background-color: #D8FDBA">
                 </div>
                 <div class="form-group col-md-4 " style="padding-top: 30px;">
                   <div class="btn btn-primary  btn-sm addeventmore" id="addeventmore">
-                    <i class="fa fa-plus-circle pr-3"></i>Add 
+                    <i class="fa fa-plus-circle pr-3"></i>Add
                   </div>
 
                 </div>
               </div>
             </div><!-- /.card-body -->
-<!-- Amin  -->
+            <!-- Amin  -->
             <div class="card-body">
               <form action="{{route('invoice.store')}}" method="POST" id="myForm">
                 @csrf
@@ -99,7 +99,7 @@
                       </td>
                     </tr>
                     <tr>
-                      <td colspan= "4" class="text-right text-bold">Total Amount</td>
+                      <td colspan="4" class="text-right text-bold">Total Amount</td>
                       <td>
                         <input type="text" name="estimated_amount" id="estimated_amount" value="0" class="form-control form-control-sm text-right estimated_amount" readonly style="background-color: #D8FDBA;">
                       </td>
@@ -110,30 +110,30 @@
                 <br>
                 <div class="form-row">
                   <div class="form-group col-md-12">
-                     <textarea name="description" id="description" class="form-control" placeholder="Write Description Here"></textarea>
+                    <textarea name="description" id="description" class="form-control" placeholder="Write Description Here"></textarea>
                   </div>
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-4">
-                     <label for="">Paid Status</label>
-                     <select name="paid_status" id="paid_status" class="form-control form-control-sm">
-                       <option value="">Select Status</option>
-                       <option value="full_paid">Full Paid</option>
-                       <option value="full_due">Full Due</option>
-                       <option value="partial_paid">Partial  Paid</option>
-                     </select>
-                     <input type="number" name="paid_amount" class="form-control form-control-sm paid_amount" placeholder="Enter Paid Amount" style="display: none">
+                    <label for="">Paid Status</label>
+                    <select name="paid_status" id="paid_status" class="form-control form-control-sm">
+                      <option value="">Select Status</option>
+                      <option value="full_paid">Full Paid</option>
+                      <option value="full_due">Full Due</option>
+                      <option value="partial_paid">Partial Paid</option>
+                    </select>
+                    <input type="number" name="paid_amount" class="form-control form-control-sm paid_amount" placeholder="Enter Paid Amount" style="display: none">
                   </div>
                   <div class="form-group col-md-8">
                     <label for="">Customer Name</label>
-                     <select name="customer_id" id="customer_id" class="form-control form-control-sm">
-                       <option value=""> Select Customer</option>
-                       @foreach($customers as $customer)
-                       <option value="{{$customer->id}}">{{$customer->name}} ({{$customer->mobile}}) ({{$customer->address}})</option>
-                       @endforeach
-                       <option value="0">New Customers</option>
-                      
-                     </select>
+                    <select name="customer_id" id="customer_id" class="form-control form-control-sm">
+                      <option value=""> Select Customer</option>
+                      @foreach($customers as $customer)
+                      <option value="{{$customer->id}}">{{$customer->name}} ({{$customer->mobile}}) ({{$customer->address}})</option>
+                      @endforeach
+                      <option value="0">New Customers</option>
+
+                    </select>
                   </div>
                 </div>
                 <div class="form-row new_customer" style="display: none">
@@ -147,24 +147,24 @@
                     <input type="text" name="address" id="address" class="form-control form-control-sm" placeholder="Write Customer Address">
                   </div>
                 </div>
-              </div>
-                <div class="form-group">
-                  <button type="submit" class="btn btn-primary" id="storeBtn">Purchase Store</button>
-                </div>
-
-              </form>
             </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary" id="storeBtn">Purchase Store</button>
+            </div>
+
+            </form>
           </div>
-
-
-        </section>
-        <!-- /.Left col -->
-
       </div>
-      <!-- /.row (main row) -->
-    </div><!-- /.container-fluid -->
+
+
   </section>
-  <!-- /.content -->
+  <!-- /.Left col -->
+
+</div>
+<!-- /.row (main row) -->
+</div><!-- /.container-fluid -->
+</section>
+<!-- /.content -->
 </div>
 
 <script type="text/javascript">
@@ -193,16 +193,16 @@
 
 {{-- stock --}}
 <script type="text/javascript">
-  $(function(){
-    $(document).on('change','#product_id',function(){
-      var product_id=$(this).val();
+  $(function() {
+    $(document).on('change', '#product_id', function() {
+      var product_id = $(this).val();
       $.ajax({
-        url:"{{route('check-product-stock')}}",
-        type:"GET",
-        data:{
-          product_id:product_id,
+        url: "{{route('check-product-stock')}}",
+        type: "GET",
+        data: {
+          product_id: product_id,
         },
-        success:function(data){
+        success: function(data) {
           $('#cuttent_stoct_qty').val(data);
 
         }
@@ -243,104 +243,102 @@
 
 </script>
 <script type="text/javascript">
-  $(document).ready(function(){
+  $(document).ready(function() {
     $(document).on('click', '#addeventmore', function() {
-       var date        =$('#date').val();
-       var invoice_no =$('#invoice_no').val();
-       var category_id =$('#category_id').val();
-       var category_name =$('#category_id').find('option:selected').text();
-       var product_id =$('#product_id').val();
-       var product_name =$('#product_id').find('option:selected').text();
+      var date = $('#date').val();
+      var invoice_no = $('#invoice_no').val();
+      var category_id = $('#category_id').val();
+      var category_name = $('#category_id').find('option:selected').text();
+      var product_id = $('#product_id').val();
+      var product_name = $('#product_id').find('option:selected').text();
 
-       if(date ==''){     
+      if (date == '') {
         toastr.error("Date filed is Null");
-          return false;
-        };
-        if(category_id ==''){
-          toastr.error("Category filed is Null");
-          return false;
-        };
-        if(product_id ==''){
-          toastr.error("Product filed is Null");
-          return false;
-        };
-        var source =$('#document-templete').html();
-        var template= Handlebars.compile(source);
-         var data ={
-                  date:date,
-                  invoice_no:invoice_no,
-                  category_id:category_id,
-                  category_name:category_name,
-                  product_id:product_id,
-                  product_name:product_name,
+        return false;
+      };
+      if (category_id == '') {
+        toastr.error("Category filed is Null");
+        return false;
+      };
+      if (product_id == '') {
+        toastr.error("Product filed is Null");
+        return false;
+      };
+      var source = $('#document-templete').html();
+      var template = Handlebars.compile(source);
+      var data = {
+        date: date,
+        invoice_no: invoice_no,
+        category_id: category_id,
+        category_name: category_name,
+        product_id: product_id,
+        product_name: product_name,
 
-         };
-         var html =template(data);
-         $('#Addrow').append(html);
+      };
+      var html = template(data);
+      $('#Addrow').append(html);
     });
-    $(document).on('click','.removeeventmore',function(event){
-       $(this).closest(".delete_add_more_item").remove();
-       totalAmountPrice();
+    $(document).on('click', '.removeeventmore', function(event) {
+      $(this).closest(".delete_add_more_item").remove();
+      totalAmountPrice();
 
     });
 
-    $(document).on('keyup click','.unit_price,.selling_qty',function(){
-       var unit_price   =$(this).closest("tr").find("input.unit_price").val();
-       var qty          =$(this).closest("tr").find("input.selling_qty").val();
-       var total        =unit_price * qty;
-       $(this).closest("tr").find("input.selling_price").val(total);
+    $(document).on('keyup click', '.unit_price,.selling_qty', function() {
+      var unit_price = $(this).closest("tr").find("input.unit_price").val();
+      var qty = $(this).closest("tr").find("input.selling_qty").val();
+      var total = unit_price * qty;
+      $(this).closest("tr").find("input.selling_price").val(total);
       $('#discount_amount').trigger('keyip');
     });
 
-    $(document).on('keyup','#discount_amount',function(){
+    $(document).on('keyup', '#discount_amount', function() {
       totalAmountPrice();
     })
 
-    function totalAmountPrice(){
-      var sum=0;
-      $('.selling_price').each(function(){
-         var value =$(this).val();
-         if(!isNaN(value) && value.lenght !=0){
-            sum += parseFloat(value);
-         }
+    function totalAmountPrice() {
+      var sum = 0;
+      $('.selling_price').each(function() {
+        var value = $(this).val();
+        if (!isNaN(value) && value.lenght != 0) {
+          sum += parseFloat(value);
+        }
       });
-      var discount_amount=parseFloat($('#discount_amount').val());
-      if(!isNaN(discount_amount) && discount_amount.lenght !=0){
+      var discount_amount = parseFloat($('#discount_amount').val());
+      if (!isNaN(discount_amount) && discount_amount.lenght != 0) {
         sum -= parseFloat(discount_amount);
       }
 
       $('#estimated_amount').val(sum);
 
     }
-     
-    });
- 
 
+  });
 </script>
 
 <script type="text/javascript">
-// paid Status start
-  $(function(){
-    $(document).on('change','#paid_status',function(){
-     
-      var paid_status=$(this).val();
-      if(paid_status =='partial_paid'){
+  // paid Status start
+  $(function() {
+    $(document).on('change', '#paid_status', function() {
+
+      var paid_status = $(this).val();
+      if (paid_status == 'partial_paid') {
         $('.paid_amount').show();
-      }else{
+      } else {
         $('.paid_amount').hide();
       }
 
     });
   });
   // paid Status end
-//  Customer status
-$(function(){
-    $(document).on('change','#customer_id',function(){
-     
-      var customer_id=$(this).val();
-      if(customer_id =='0'){
+  //  Customer status
+  $(function() {
+    $(document).on('change', '#customer_id', function() {
+
+      var customer_id = $(this).val();
+      if (customer_id == '0') {
         $('.new_customer').show();
-      }else{
+      } else {
         $('.new_customer').hide();
       }
 

@@ -33,22 +33,21 @@
           <div class="card">
             <div class="card-header">
               <h3 class="text-primary">
-                Pending Invoice list
-                <!-- <a class="btn btn-primary float-right btn-sm" href="{{ route('invoice.add') }}"><i class="fa fa-plus-circle pr-3"></i>Add Purchase</a> -->
+                Invoice list
+                <a class="btn btn-primary float-right btn-sm" href="{{ route('invoice.add') }}"><i class="fa fa-plus-circle pr-3"></i>Add Invoice</a>
               </h3>
             </div><!-- /.card-header -->
             <div class="card-body">
-              <table id="example2" class="table table-responsive table-bordered table-hover ">
+              <table id="" class="table  table-bordered table-hover ">
                 <thead>
                   <tr style="color:#3A6408">
                     <th>SL.</th>
-                    <th style="width:20%">Customer Name</th>
+                    <th>Customer Name</th>
                     <th>Invoice NO</th>
                     <th>Date</th>
-                    <th style="width:25%">Describtion</th>
+                    <th>Describtion</th>
                     <th>Amount</th>
-                    <th>status</th>
-                    <th style="width:10%">Action</th>
+                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -65,18 +64,7 @@
                     <td>{{$invoice->description }}</td>
                     <td>{{$invoice['payment']['total_amount']}}</td>
                     <td>
-                      @if($invoice->status =='0')
-                      <span style="background-color:#FFCA45;padding:5px;">Pending</span>
-                      @elseif($invoice->status =='1')
-                      <span style="background-color: #23A9F2;padding:5px;">Approved</span>
-                      @endif
-
-                    </td>
-                    <td>
-                      @if($invoice->status=="0")
-                      <a href="{{ route('invoice.approve',$invoice->id) }}" class="btn btn-sm btn-success " title="Approval"><i class="fa fa-check-circle"></i></a>
-                      <a href="{{ route('invoice.delete',$invoice->id) }}" id="delete" class="btn btn-sm btn-danger " title="Delete"><i class="fa fa-trash"></i></a>
-                      @endif
+                      <a href="{{ route('invoice.print',$invoice->id) }}" class="btn btn-sm btn-success " target="_blank" title="print"><i class="fa fa-print"></i></a>
                     </td>
                   </tr>
                   @endforeach
