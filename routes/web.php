@@ -119,5 +119,5 @@ Route::prefix('stock')->group(function () {
     Route::get('/report/pdf', [App\Http\Controllers\Backend\StockController::class, 'stockreportPdf'])->name('stock.report.pdf');
     Route::get('/report/supplier/wise', [App\Http\Controllers\Backend\StockController::class, 'stockreportSupplierwise'])->name('stock.report.supplier.wise');
     Route::get('/report/supplier/wise/pdf', [App\Http\Controllers\Backend\StockController::class, 'stockreportSupplierwisepdf'])->name('stock.report.supplier.wise.pdf');
-
+    Route::get('/report/product/wise/pdf', [App\Http\Controllers\Backend\StockController::class, 'stockreportproductwisepdf'])->name('stock.report.product.wise.pdf');
 });

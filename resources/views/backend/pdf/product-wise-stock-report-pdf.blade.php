@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <title>Stock Report </title>
+    <title>Product  Wise Stock Report </title>
 </head>
 
 <body>
@@ -17,18 +17,21 @@
                 <p class="text-center">Mirpur 10,Dhaka</p>
                 <hr style="margin-bottom:0px;">
                 <div class="row">
-                    <p class="text-center">Stock Report</p>
+                    <p class="text-center">Product Wise Stock report</p>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
             <div class="card-body">
+                
+                <br>
+                <hr>
               <table border="1" width="100%" style="text-align: center;">
+
                                 <thead>
-                                    <tr style="color:#3A6408">
-                                        <th>SL.</th>
-                                        <th>Supplier Name</th>
+                                    <tr style="color:#3A6408">  
+                                        <th>Supplier Name</th> 
                                         <th>Category Name </th>
                                         <th>Product Name</th>
                                         <th>In qty</th>
@@ -39,23 +42,20 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($allData as $key=>$product)
                                     @php
                                     $buying_total =App\Models\Purchase::where('category_id',$product->category_id)->where('product_id',$product->id)->where('status','1')->sum('buying_qty');
-
                                     $selling_total =App\Models\InvoiceDetails::where('category_id',$product->category_id)->where('product_id',$product->id)->where('status','1')->sum('selling_qty');
                                     @endphp
-                                    <tr>
-                                        <td>{{ $key+1 }}</td>
-                                        <td>{{ $product['supplier']['name']}}</td>
+                                    <tr>    
+                                        <td>{{$product['supplier']['name']}}</td>                  
                                         <td>{{ $product['category']['name']}}</td>
                                         <td>{{ $product->name }}</td>
                                         <td>{{ $buying_total }}</td>
-                                        <td>{{ $selling_total  }}</td>                                       
+                                        <td>{{ $selling_total  }}</td> 
                                         <td>{{$product->quantity}} </td>
                                         <td>{{ $product['unit']['name']}}</td>         
                                     </tr>
-                                    @endforeach
+                                 
                                 </tbody>
                             </table>
             </div>
