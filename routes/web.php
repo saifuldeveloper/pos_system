@@ -113,3 +113,11 @@ Route::prefix('invoice')->group(function () {
     Route::get('/daily/report', [App\Http\Controllers\Backend\InvoiceController::class, 'dailyreport'])->name('invoice.daily.report');
     Route::get('/daily/report/pdf', [App\Http\Controllers\Backend\InvoiceController::class, 'dailyreportpdf'])->name('invoice.daily.invoice.pdf');
 });
+
+Route::prefix('stock')->group(function () {
+    Route::get('/report', [App\Http\Controllers\Backend\StockController::class, 'stockreport'])->name('stock.report');
+    Route::get('/report/pdf', [App\Http\Controllers\Backend\StockController::class, 'stockreportPdf'])->name('stock.report.pdf');
+    Route::get('/report/supplier/wise', [App\Http\Controllers\Backend\StockController::class, 'stockreportSupplierwise'])->name('stock.report.supplier.wise');
+    Route::get('/report/supplier/wise/pdf', [App\Http\Controllers\Backend\StockController::class, 'stockreportSupplierwisepdf'])->name('stock.report.supplier.wise.pdf');
+
+});
