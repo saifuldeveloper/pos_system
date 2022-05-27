@@ -12,12 +12,13 @@ use App\Models\Supplier;
 use App\Models\Customers;
 use App\Models\Unit;
 use Illuminate\Support\Facades\DB;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class PurchaseController extends Controller
 {
     public function view()
     {
-        $allData = Purchase::orderBy('date','desc')->get();
+        $allData = Purchase::orderBy('date', 'desc')->get();
         // $data['allData']=purchase::all();
         // return view('backend.purchase.view-purchase',$data);
         return view('backend.purchase.view-purchase', compact('allData'));
@@ -101,25 +102,42 @@ class PurchaseController extends Controller
 
         return  redirect()->route('purchase.view')->with($notification);
     }
-    public function pendinglist(){
-        $allData = Purchase::orderBy('date','desc')->where('status','0')->get();
+    public function pendinglist()
+    {
+        $allData = Purchase::orderBy('date', 'desc')->where('status', '0')->get();
         return view('backend.purchase.view-pending-list', compact('allData'));
     }
-    public function approve($id){
-        $purchase =Purchase::find($id);
-        $product =Product::where('id',$purchase->product_id)->first();
-        $purchase_qty=((float)($purchase->buying_qty))+((float)($product->quantity));
-        $product->quantity =$purchase_qty;
+    public function approve($id)
+    {
+        $purchase = Purchase::find($id);
+        $product = Product::where('id', $purchase->product_id)->first();
+        $purchase_qty = ((float)($purchase->buying_qty)) + ((float)($product->quantity));
+        $product->quantity = $purchase_qty;
 
-        if($product->save()){
+        if ($product->save()) {
             DB::table('purchases')
-                        ->where('id',$id)
-                        ->update(['status'=> 1]);
+                ->where('id', $id)
+                ->update(['status' => 1]);
         }
         $notification = array(
             'message' => 'Purchase Approved Successfully',
             'alert-type' => 'success'
         );
         return  redirect()->route('purchase.pending.list')->with($notification);
+    }
+    public function purchasereport()
+    {
+
+        return view('backend.purchase.daily-puchase-report');
+    }
+    public function purchasereportpdf(Request $request)
+    {
+        $sdate = date('Y-m-d', strtotime($request->start_date));
+        $edate = date('Y-m-d', strtotime($request->end_date));
+        $data['allData'] = Purchase::whereBetween('date', [$sdate, $edate])->where('status', '1')->orderBy('supplier_id')->orderBy('category_id')->orderBy('product_id')->get();
+        $data['start_date'] = date('Y-m-d', strtotime($request->start_date));
+        $data['end_date'] = date('Y-m-d', strtotime($request->end_date));
+        $pdf = PDF::loadView('backend.pdf.daily-purchse-report-pdf', $data);
+        return $pdf->download('document.pdf');
     }
 }

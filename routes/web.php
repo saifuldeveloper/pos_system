@@ -92,6 +92,8 @@ Route::prefix('purchase')->group(function () {
     Route::get('/pending', [App\Http\Controllers\Backend\PurchaseController::class, 'pendinglist'])->name('purchase.pending.list');
     Route::get('/approve/{id}', [App\Http\Controllers\Backend\PurchaseController::class, 'approve'])->name('purchase.approve');
     Route::get('/delete/{id}', [App\Http\Controllers\Backend\PurchaseController::class, 'delete'])->name('purchase.delete');
+    Route::get('/report', [App\Http\Controllers\Backend\PurchaseController::class, 'purchasereport'])->name('purchase.report');
+    Route::get('/report/pdf', [App\Http\Controllers\Backend\PurchaseController::class, 'purchasereportpdf'])->name('purchase.report.pdf');
 });
 
 
