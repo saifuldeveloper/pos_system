@@ -57,6 +57,8 @@ Route::prefix('customers')->group(function () {
     Route::get('/edit/{id}', [App\Http\Controllers\Backend\CustomersController::class, 'edit'])->name('customers.edit');
     Route::post('/update/{id}', [App\Http\Controllers\Backend\CustomersController::class, 'update'])->name('customers.update');
     Route::get('/delete/{id}', [App\Http\Controllers\Backend\CustomersController::class, 'delete'])->name('customers.delete');
+    Route::get('/creadit', [App\Http\Controllers\Backend\CustomersController::class, 'customercreadit'])->name('customers.creadit');
+    Route::get('/creadit/pdf', [App\Http\Controllers\Backend\CustomersController::class, 'customercreaditpdf'])->name('customers.creadit.pdf');
 });
 
 Route::prefix('unit')->group(function () {

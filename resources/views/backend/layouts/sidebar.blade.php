@@ -118,6 +118,12 @@ $route =Route::current()->getName();
                 <p>View Customers</p>
               </a>
             </li>
+            <li class="nav-item">
+              <a href="{{ route('customers.creadit') }}" class="nav-link {{ $route==('customers.creadit')?'active':'' }}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Creadit Customers</p>
+              </a>
+            </li>
           </ul>
         </li>
         <li class="nav-item  has-treeview" {{ ($prefix=='/unit')?'menu-open':'' }}>
