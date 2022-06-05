@@ -21,8 +21,6 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->double('quantity')->default('0');
             $table->tinyInteger('status')->default(1);
-            $table->integer('created_by')->nullable();
-            $table->integer('updated_by')->nullable();
             $table->timestamps();
         });
     }

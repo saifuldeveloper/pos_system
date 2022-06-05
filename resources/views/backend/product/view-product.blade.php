@@ -53,9 +53,9 @@
                   @foreach ($allData as $key=>$product)
                   <tr>
                     <td>{{ $key+1 }}</td>
-                    <td>{{ $product['supplier']['name']}}</td>
+                    <td>{{ @$product['supplier']['name']}}</td>
                     <td>{{ $product['category']['name']}}</td>
-                    <td>{{ $product['unit']['name']}}</td>
+                    <td>{{ @$product['unit']['name']}}</td>
                     <td>{{ $product->name }}</td>
                     @php
                     $count_product= App\Models\Purchase::where('product_id',$product->id)->count();
