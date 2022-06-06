@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Invoice extends Model
 {
@@ -11,8 +12,8 @@ class Invoice extends Model
     {
         return $this->belongsTo(Payment::class, 'id', 'invoice_id');
     }
-    public function invoice_details()
-    {
-        return $this->hasMany(invoiceDetails::class, 'invoice_id', 'id');
-    }
+     public function invoice_details(){
+        return $this->hasMany(InvoiceDetails::class, 'invoice_id', 'id');
+     }
+   
 }

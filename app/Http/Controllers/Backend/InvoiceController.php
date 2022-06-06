@@ -170,7 +170,7 @@ class InvoiceController extends Controller
     }
     public function approve($id)
     {
-        $invoice = Invoice::with(['invoice_details'])->find($id);
+        $invoice =Invoice::with(['invoice_details'])->find($id);
         return  view('backend.invoice.approve-invoice', compact('invoice'));
     }
     public function approvestore(Request  $request, $id)

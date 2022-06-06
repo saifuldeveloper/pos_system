@@ -6,8 +6,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Customers;
 use App\Models\Payment;
+use App\Models\Invoice;
+use App\Models\InvoiceDetails;
+use App\Models\PaymentDetails;
 use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\DB;
+
 
 class CustomersController extends Controller
 {
@@ -93,7 +98,7 @@ class CustomersController extends Controller
         return  redirect()->back()->with($notification);
     }else{
         $payment = Payment::where('invoice_id',$invoice_id)->first();
-        $payment->paid_amount = $request->new_paid_amount;
+        $payment_details =new PaymentDetails();
         $payment->paid_status = $request->paid_status;
         if($request->paid_status == 'full_paid'){
             $payment->paid_amount = Payment::where('invoice_id',$invoice_id)->first()['paid_amount'] + $request->new_paid_amount; 
@@ -102,7 +107,7 @@ class CustomersController extends Controller
         }elseif($request->paid_status == 'partial_paid'){
             $payment->paid_amount = Payment::where('invoice_id',$invoice_id)->first()['paid_amount'] + $request->paid_amount;
             $payment->due_amount = Payment::where('invoice_id',$invoice_id)->first()['due_amount'] - $request->paid_amount;
-            $payment_details->current_paid_amount = $request->paid_amount;
+            $payment_details->current_paid_amount = $request->paid_amount;       
         }
         $payment->save();
         $payment_details->invoice_id = $invoice_id;
