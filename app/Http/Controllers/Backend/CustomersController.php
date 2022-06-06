@@ -124,7 +124,12 @@ class CustomersController extends Controller
     }
 }
 
+  public function invoicedeailspdf($invoice_id){
+    $data['payment'] = Payment::where('invoice_id',$invoice_id)->first();
+    $pdf = PDF::loadView('backend.pdf.invoice-details-pdf', $data);
+    return $pdf->download('document.pdf');
 
+  }
 
 
 }

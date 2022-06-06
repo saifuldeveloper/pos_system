@@ -71,7 +71,7 @@
                                                     <a href="{{ route('customers.edit.invoice', $payment->invoice_id) }}"
                                                         class="btn btn-sm btn-primary mr-5" title="Edit"><i
                                                             class="fa fa-edit"></i></a>
-                                                    <a href="" id="delete" class="btn btn-sm btn-danger " title="Delete"><i
+                                                    <a href="{{ route('customers.invoice.details.pdf',$payment->invoice_id) }}"  target="_blank" class="btn btn-sm btn-info "><i
                                                             class="fa fa-eye"></i></a>
                                                 </td>
                                                 @php

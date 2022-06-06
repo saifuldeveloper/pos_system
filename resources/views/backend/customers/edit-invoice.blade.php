@@ -42,7 +42,7 @@
                             <div class="card-body">
                                 <table width="100%">
                                     <tbody>
-                                        <!-- <h5>Customer Onfo</h5> -->
+                                         <h5>Edit Invoice  (Invoice NO :{{ $payment['invoice']['invoice_no'] }} )</h5>
                                         <tr class="pb-1">
                                             <td width="15%"><strong>Name</strong> :{{ $payment['customer']['name'] }}</td>
                                             <td width="25%"><strong>Mobile
@@ -52,7 +52,7 @@
                                             </td>
                                         </tr>
                                     </tbody>
-                                </table>
+                                 </table>
                                 <form action="{{ route('customers.update.invoice',$payment->invoice_id) }}" method="POST" id="myForm">
                                     @csrf
                                     <table border="2" width="100%" class="pb-4">
