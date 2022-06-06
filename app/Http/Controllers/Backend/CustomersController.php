@@ -80,4 +80,46 @@ class CustomersController extends Controller
         return $pdf->download('document.pdf');
 
     }
+    public function editinvoice($invoice_id) {
+        $payment = Payment::where('invoice_id',$invoice_id)->first();      
+        return view('backend.customers.edit-invoice', compact('payment'));
+    }
+    public function updateinvoice(Request $request, $invoice_id){  
+    if($request->new_paid_amount <$request->due_amount){
+        $notification = array(
+            'message' => 'Paid Amount is greater than Due Amount',
+            'alert-type' => 'error'
+        );
+        return  redirect()->back()->with($notification);
+    }else{
+        $payment = Payment::where('invoice_id',$invoice_id)->first();
+        $payment->paid_amount = $request->new_paid_amount;
+        $payment->paid_status = $request->paid_status;
+        if($request->paid_status == 'full_paid'){
+            $payment->paid_amount = Payment::where('invoice_id',$invoice_id)->first()['paid_amount'] + $request->new_paid_amount; 
+            $payment->due_amount = '0';
+            $payment_details->current_paid_amount = $request->new_paid_amount;  
+        }elseif($request->paid_status == 'partial_paid'){
+            $payment->paid_amount = Payment::where('invoice_id',$invoice_id)->first()['paid_amount'] + $request->paid_amount;
+            $payment->due_amount = Payment::where('invoice_id',$invoice_id)->first()['due_amount'] - $request->paid_amount;
+            $payment_details->current_paid_amount = $request->paid_amount;
+        }
+        $payment->save();
+        $payment_details->invoice_id = $invoice_id;
+        $payment_details->date =date('Y-m-d',strtotime($request->date));
+        $payment_details->updated_by = Auth::user()->id;
+        $payment_details->save();
+        $notification = array(
+            'message' => 'Invoice Updated Successfully',
+            'alert-type' => 'success'
+        );
+        return  redirect()->route('customers.creadit')->with($notification);
+
+
+    }
+}
+
+
+
+
 }

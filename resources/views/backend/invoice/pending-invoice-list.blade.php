@@ -1,97 +1,101 @@
 @extends('backend.layouts.master')
 
 @section('content')
-<!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
-  <!-- Content Header (Page header) -->
-  <div class="content-header">
-    <div class="container-fluid">
-      <div class="row mb-2">
-        <div class="col-sm-6">
-          <h1 class="m-0 text-primary">Manage Invoice</h1>
-        </div><!-- /.col -->
-        <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Invoice</li>
-          </ol>
-        </div><!-- /.col -->
-      </div><!-- /.row -->
-    </div><!-- /.container-fluid -->
-  </div>
-  <!-- /.content-header -->
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0 text-primary">Manage Invoice</h1>
+                    </div><!-- /.col -->
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">Invoice</li>
+                        </ol>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+        <!-- /.content-header -->
 
-  <!-- Main content -->
-  <section class="content">
-    <div class="container-fluid">
-      <!-- Small boxes (Stat box) -->
-      <!-- Main row -->
-      <div class="row">
-        <!-- Left col -->
-        <section class="col-lg-12">
-          <!-- Custom tabs (Charts with tabs)-->
-          <div class="card">
-            <div class="card-header">
-              <h3 class="text-primary">
-                Pending Invoice list
-                <!-- <a class="btn btn-primary float-right btn-sm" href="{{ route('invoice.add') }}"><i class="fa fa-plus-circle pr-3"></i>Add Purchase</a> -->
-              </h3>
-            </div><!-- /.card-header -->
-            <div class="card-body">
-              <table id="example2" class="table table-responsive table-bordered table-hover ">
-                <thead>
-                  <tr style="color:#3A6408">
-                    <th>SL.</th>
-                    <th style="width:20%">Customer Name</th>
-                    <th>Invoice NO</th>
-                    <th>Date</th>
-                    <th style="width:25%">Describtion</th>
-                    <th>Amount</th>
-                    <th>status</th>
-                    <th style="width:10%">Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  @foreach ($allData as $key=>$invoice)
-                  <tr>
-                    <td>{{$key+1}}</td>
-                    <td>
-                      {{$invoice['payment']['customer']['name']}}
-                      ({{$invoice['payment']['customer']['mobile']}})-
-                      ({{$invoice['payment']['customer']['address']}})
-                    </td>
-                    <td>Invoice no #{{$invoice->invoice_no}}</td>
-                    <td>{{date('d-m-Y',strtotime($invoice->date))}}</td>
-                    <td>{{$invoice->description }}</td>
-                    <td>{{$invoice['payment']['total_amount']}}</td>
-                    <td>
-                      @if($invoice->status =='0')
-                      <span style="background-color:#FFCA45;padding:5px;">Pending</span>
-                      @elseif($invoice->status =='1')
-                      <span style="background-color: #23A9F2;padding:5px;">Approved</span>
-                      @endif
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <!-- Small boxes (Stat box) -->
+                <!-- Main row -->
+                <div class="row">
+                    <!-- Left col -->
+                    <section class="col-lg-12">
+                        <!-- Custom tabs (Charts with tabs)-->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="text-primary">
+                                    Pending Invoice list
+                                    <!-- <a class="btn btn-primary float-right btn-sm" href="{{ route('invoice.add') }}"><i class="fa fa-plus-circle pr-3"></i>Add Purchase</a> -->
+                                </h3>
+                            </div><!-- /.card-header -->
+                            <div class="card-body">
+                                <table id="example2" class="table table-responsive table-bordered table-hover ">
+                                    <thead>
+                                        <tr style="color:#3A6408">
+                                            <th>SL.</th>
+                                            <th style="width:20%">Customer Name</th>
+                                            <th>Invoice NO</th>
+                                            <th>Date</th>
+                                            <th style="width:25%">Describtion</th>
+                                            <th>Amount</th>
+                                            <th>status</th>
+                                            <th style="width:10%">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($allData as $key => $invoice)
+                                            <tr>
+                                                <td>{{ $key + 1 }}</td>
+                                                <td>
+                                                    {{ $invoice['payment']['customer']['name'] }}
+                                                    ({{ $invoice['payment']['customer']['mobile'] }})
+                                                    -
+                                                    ({{ $invoice['payment']['customer']['address'] }})
+                                                </td>
+                                                <td>Invoice no #{{ $invoice->invoice_no }}</td>
+                                                <td>{{ date('d-m-Y', strtotime($invoice->date)) }}</td>
+                                                <td>{{ $invoice->description }}</td>
+                                                <td>{{ $invoice['payment']['total_amount'] }}</td>
+                                                <td>
+                                                    @if ($invoice->status == '0')
+                                                        <span style="background-color:#FFCA45;padding:5px;">Pending</span>
+                                                    @elseif($invoice->status == '1')
+                                                        <span style="background-color: #23A9F2;padding:5px;">Approved</span>
+                                                    @endif
 
-                    </td>
-                    <td>
-                      @if($invoice->status=="0")
-                      <a href="{{ route('invoice.approve',$invoice->id) }}" class="btn btn-sm btn-success " title="Approval"><i class="fa fa-check-circle"></i></a>
-                      <a href="{{ route('invoice.delete',$invoice->id) }}" id="delete" class="btn btn-sm btn-danger " title="Delete"><i class="fa fa-trash"></i></a>
-                      @endif
-                    </td>
-                  </tr>
-                  @endforeach
-                </tbody>
-              </table>
-            </div><!-- /.card-body -->
-          </div>
+                                                </td>
+                                                <td>
+                                                    @if ($invoice->status == '0')
+                                                        <a href="{{ route('invoice.approve', $invoice->id) }}"
+                                                            class="btn btn-sm btn-success " title="Approval"><i
+                                                                class="fa fa-check-circle"></i></a>
+                                                        <a href="{{ route('invoice.delete', $invoice->id) }}" id="delete"
+                                                            class="btn btn-sm btn-danger " title="Delete"><i
+                                                                class="fa fa-trash"></i></a>
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div><!-- /.card-body -->
+                        </div>
+                    </section>
+                    <!-- /.Left col -->
+
+                </div>
+                <!-- /.row (main row) -->
+            </div><!-- /.container-fluid -->
         </section>
-        <!-- /.Left col -->
-
-      </div>
-      <!-- /.row (main row) -->
-    </div><!-- /.container-fluid -->
-  </section>
-  <!-- /.content -->
-</div>
-
+        <!-- /.content -->
+    </div>
 @endsection

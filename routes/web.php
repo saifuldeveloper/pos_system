@@ -59,6 +59,10 @@ Route::prefix('customers')->group(function () {
     Route::get('/delete/{id}', [App\Http\Controllers\Backend\CustomersController::class, 'delete'])->name('customers.delete');
     Route::get('/creadit', [App\Http\Controllers\Backend\CustomersController::class, 'customercreadit'])->name('customers.creadit');
     Route::get('/creadit/pdf', [App\Http\Controllers\Backend\CustomersController::class, 'customercreaditpdf'])->name('customers.creadit.pdf');
+    Route::get('/invoice/edit/{invoice_id}', [App\Http\Controllers\Backend\CustomersController::class, 'editinvoice'])->name('customers.edit.invoice');
+    Route::post('/invoice/update/{invoice_id}', [App\Http\Controllers\Backend\CustomersController::class, 'updateinvoice'])->name('customers.update.invoice');
+
+
 });
 
 Route::prefix('unit')->group(function () {

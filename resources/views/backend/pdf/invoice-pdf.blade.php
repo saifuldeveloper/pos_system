@@ -21,10 +21,7 @@
                 
                 <p class="text-center">Customer Information</p>
 
-                </div>
-
-               
-
+                </div>           
                 <table width="100%">
                 
                     <tbody>
