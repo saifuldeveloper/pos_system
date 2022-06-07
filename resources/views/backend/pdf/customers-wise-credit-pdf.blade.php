@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <title>Creadit Customers Report</title>
+    <title> Customers wise credit Report</title>
 </head>
 
 <body>
@@ -18,7 +18,7 @@
                 <p class="text-center">Mirpur 10,Dhaka</p>
                 <hr style="margin-bottom:0px;">
                 <div class="row">
-                    <p class="text-center">Creadit Customers Report</p>
+                    <p class="text-center"> Customers wiser credit Report</p>
                 </div>
             </div>
         </div>
